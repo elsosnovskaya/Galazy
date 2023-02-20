@@ -1,0 +1,9 @@
+--вытянуть дату по месяцам с разбивкой на средние/минимум/максимум 
+select toStartOfMonth(InvoiceDate) as month, avg(Quantity) as avg, min(Quantity) as min, max(Quantity) as max
+from default.retail
+where Description != 'Manual'
+and Country='United Kingdom'
+and Quantity>0
+group by month
+order by avg desc
+limit 10
