@@ -7,3 +7,18 @@ and Quantity>0
 group by month
 order by avg desc
 limit 10
+
+Часть JOIN
+cколько всего уникальных юзеров совершили покупки в нашем приложении.
+Объедините нужные таблицы, посчитайте число уникальных UserID для 
+каждого источника (Source), и в качестве ответа укажите число пользователей, пришедших из Source_7.
+select Source, count( distinct UserID)
+from default.checks as c
+inner join 
+(select DISTINCT *
+from default.installs as i 
+left join default.devices as d on d.DeviceID=i.DeviceID) as total 
+on total.UserID=c.UserID
+group by Source
+LIMIT 15
+
